@@ -1,0 +1,2 @@
+# SkidChat
+Encrypted chat
