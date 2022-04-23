@@ -25,5 +25,3 @@ hs_err_pid*
 /Client/run/
 /.idea/
 /out/
-/Server/src/META-INF/
-/Client/src/META-INF/

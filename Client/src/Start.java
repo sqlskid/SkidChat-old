@@ -14,7 +14,7 @@ public class Start {
 
     public static void main(String[] args) throws PacketWriteException {
         String fileName = "skidchatlogin";
-        String ip = "127.0.0.1";
+        String ip = "82.202.65.61";
         int port = 3386;
         if(args.length >= 2){
             ip = args[0];
