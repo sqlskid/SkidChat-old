@@ -22,5 +22,19 @@ This part is really easy, just download Server.jar and run it like this:
 ## Trusted servers
 The only trusted server we have right now is the default one. (sqlskid) However this may change in the future!
 
+## Commands
+```
+name - set a nickname
+rank - set a rank for a user (DEV ONLY)
+kick - kick a user (DEV ONLY)
+chatroom - chatroom (create, remove, show all chatrooms)
+```
+
+```
+console only commands:
+end
+save
+```
+
 ## Credits
 [Foreheadchann](https://github.com/Foreheadchann) - Packet system
