@@ -48,8 +48,10 @@ public class Chatrooms extends Command {
                 case "remove":
                     if(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) == null)
                         return;
-
                     Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()).destroy();
+                    Server.instance.chatroomManager.removeChatroom(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) );
+
+                    respond(client, "You deleted your chatroom!");
                     break;
                 case "join":
                     if(args.length > 1){

@@ -32,6 +32,7 @@ public class Server extends Thread{
     public RSA rsa;
     public AES aes;
     private int port = 1;
+    public int version = 2;
 
     public Server(int port) throws IOException {
         this.port = port;

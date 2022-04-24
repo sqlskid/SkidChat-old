@@ -20,6 +20,9 @@ public class ChatPacket extends Packet {
         Value message = this.readValue("message", this.readArguments(packet));
         Value chatroom = this.readValue("chatroom", this.readArguments(packet));
 
+        if(!client.canSendMessage(message.getString()))
+            return;
+
         if (message.getString().replaceAll(" ", "").length() < 1)
             return;
 
@@ -35,8 +38,6 @@ public class ChatPacket extends Packet {
 
         if (cr == null)
             return;
-
-        Server.instance.chatroomManager.message(cr.getName(), message.getString(), this.client.getUuid());
 
         if(cr.isAnonymous()){
             username = Value.construct("username", "Anonymous");
@@ -54,6 +55,8 @@ public class ChatPacket extends Packet {
                 e.printStackTrace();
             }
         }
+
+        client.timeSinceLastMessage = System.currentTimeMillis();
     }
 
     @Override

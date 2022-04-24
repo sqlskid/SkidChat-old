@@ -27,9 +27,15 @@ public class ClientHandler extends Thread {
         {
             System.out.println("Client dropped. Reason: " + e.getMessage());
 
+            if(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) != null){
+                Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()).destroy();
+                Server.instance.chatroomManager.removeChatroom(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) );
+            }
             Server.instance.rsa.removeKey(client);
             Server.instance.aes.removeKey(client);
-            Server.instance.clientDataManager.saveDataByClient(client);
+            if(client.loggedIn) {
+                Server.instance.clientDataManager.saveDataByClient(client);
+            }
             Server.instance.clientList.remove(client);
             stop();
         }
@@ -39,10 +45,16 @@ public class ClientHandler extends Thread {
         } catch (Exception e) {
             System.out.println("Client dropped. Reason: " + e.getMessage());
 
+            if(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) != null){
+                Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()).destroy();
+                Server.instance.chatroomManager.removeChatroom(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) );
+            }
             Server.instance.rsa.removeKey(client);
             Server.instance.aes.removeKey(client);
-            Server.instance.clientDataManager.saveDataByClient(client);
-            Server.instance.clientList.remove(client);
+            if(client.loggedIn) {
+                Server.instance.clientDataManager.saveDataByClient(client);
+            }
+                Server.instance.clientList.remove(client);
 
             stop();
         }
@@ -77,6 +89,10 @@ public class ClientHandler extends Thread {
                 {
                     client.getSocket().close();
                     Server.instance.clientList.remove(client);
+                    if(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) != null){
+                        Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()).destroy();
+                        Server.instance.chatroomManager.removeChatroom(Server.instance.chatroomManager.getChatroomByOwner(client.getUuid()) );
+                    }
 
                     System.out.println("Client dropped. Reason: Invalid packet id");
                     stop();

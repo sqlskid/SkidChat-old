@@ -8,6 +8,7 @@ import xyz.sqlskid.skidchat.server.Server;
 import xyz.sqlskid.skidchat.server.client.Client;
 import xyz.sqlskid.skidchat.server.client.ClientData;
 
+import java.io.IOException;
 import java.util.UUID;
 
 public class LoginPacket extends Packet {
@@ -19,6 +20,19 @@ public class LoginPacket extends Packet {
     @Override
     public void readPacket(String packet) throws PacketReadException, PacketWriteException {
         Value uuid = this.readValue("uuid", this.readArguments(packet));
+        Value version = this.readValue("version", this.readArguments(packet));
+
+        if(version != null){
+            if(version.getInteger() != Server.instance.version) {
+                respond(client, "Your client version is old! Please download the latest release from: https://github.com/sqlskid/SkidChat");
+                try {
+                    client.getSocket().close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
+        }
 
         client.setUuid(UUID.fromString(uuid.getString()));
 

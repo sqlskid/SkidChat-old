@@ -1,5 +1,6 @@
 package me.hideri.ext.server.packet;
 
+import me.hideri.ext.server.packet.impl.ChatPacket;
 import me.hideri.ext.server.packet.impl.EncryptedPacket;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,6 +57,17 @@ public abstract class Packet
         }
 
         return encryptedPacket.constructPacket(key, data);
+    }
+
+    public void respond(Client client, String message){
+        ChatPacket packet = (ChatPacket) client.packetManager.getPacketById(HeaderStorage.instance.CHAT.getId());
+        Packet.Value username = Packet.Value.construct("username", "Server");
+        Packet.Value messag = Packet.Value.construct("message", message);
+        try {
+            packet.sendPacket(packet.constructPacket(username,messag));
+        } catch (PacketWriteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void defaultSendPacket(Value... arguments)

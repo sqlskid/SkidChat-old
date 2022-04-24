@@ -26,6 +26,11 @@ public class ChatPacket extends Packet {
             }
             Value chatroom = this.readValue("chatroom", this.readArguments(packet));
 
+            if(chatroom == null){
+                System.out.println(username.getString() + ": " + message.getString());
+                return;
+            }
+
             Chatroom cr = client.chatroomManager.getChatroom(chatroom.getString());
 
             if(cr == null)

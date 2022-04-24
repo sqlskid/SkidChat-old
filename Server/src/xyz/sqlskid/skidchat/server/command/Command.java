@@ -33,6 +33,17 @@ public abstract class Command {
         }
     }
 
+    public void respond(Client client, String username, String message){
+        ChatPacket packet = (ChatPacket) client.packetManager.getPacketById(HeaderStorage.instance.CHAT.getId());
+        Packet.Value user = Packet.Value.construct("username", username);
+        Packet.Value messag = Packet.Value.construct("message", message);
+        try {
+            packet.sendPacket(packet.constructPacket(user,messag));
+        } catch (PacketWriteException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getMinLvl() {
         return minLvl;
     }

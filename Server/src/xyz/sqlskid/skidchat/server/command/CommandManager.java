@@ -1,10 +1,7 @@
 package xyz.sqlskid.skidchat.server.command;
 
 import xyz.sqlskid.skidchat.server.client.Client;
-import xyz.sqlskid.skidchat.server.command.impl.CRank;
-import xyz.sqlskid.skidchat.server.command.impl.Chatrooms;
-import xyz.sqlskid.skidchat.server.command.impl.Kick;
-import xyz.sqlskid.skidchat.server.command.impl.Name;
+import xyz.sqlskid.skidchat.server.command.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,8 @@ public class CommandManager {
         addCommand(new CRank());
         addCommand(new Kick());
         addCommand(new Chatrooms());
+        addCommand(new Msg());
+        addCommand(new Ignore());
         System.out.println("Command manager successfully loaded!");
     }
 

@@ -30,7 +30,7 @@ public class SkidChat extends Thread {
     private int port;
     public RSA rsa;
     public AES aes;
-
+    public int version = 3;
 
     public PublicKey theirKey;
 
@@ -60,6 +60,7 @@ public class SkidChat extends Thread {
             handle();
         } catch (Exception | PacketWriteException e) {
             System.out.println("Disconnected.");
+            keepAlive.stop();
         }
     }
 

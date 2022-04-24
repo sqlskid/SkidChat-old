@@ -16,7 +16,7 @@ public class LoginPacket extends Packet {
     public void readPacket(String packet) throws PacketReadException, PacketWriteException {
         Value success = this.readValue("success", this.readArguments(packet));
 
-        if(success.getBoolean() == true){
+        if(success.getBoolean()){
             client.loggedIn = true;
             System.out.println("Logged in!");
         }
@@ -25,7 +25,8 @@ public class LoginPacket extends Packet {
     @Override
     public void sendPacket(String packet) throws PacketWriteException {
         Value uuid = Value.construct("uuid", client.uuid);
+        Value version = Value.construct("version", client.version);
 
-        this.defaultSendPacket(uuid);
+        this.defaultSendPacket(uuid, version);
     }
 }

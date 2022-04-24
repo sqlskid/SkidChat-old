@@ -13,14 +13,6 @@ public class ChatroomManager {
         addChatroom(new Chatroom("general",false));
     }
 
-    public void message(String chatroom, String message, UUID uuid){
-        Chatroom cr = getChatroom(chatroom);
-        if(cr == null)
-            return;
-
-        cr.messages.put(uuid,message);
-    }
-
     public Chatroom getChatroomByOwner(UUID uuid){
         for (Chatroom chatroom: chatrooms){
             if(chatroom.owner != null && chatroom.owner.equals(uuid)) {
@@ -46,5 +38,9 @@ public class ChatroomManager {
     public void addChatroom(Chatroom chatroom){
         if(getChatroom(chatroom.getName()) == null)
             this.chatrooms.add(chatroom);
+    }
+
+    public void removeChatroom(Chatroom chatroomByOwner) {
+        chatrooms.remove(chatroomByOwner);
     }
 }

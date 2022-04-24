@@ -14,7 +14,6 @@ public class Chatroom {
     public boolean visible;
     public List<UUID> members;
     public boolean isPublic;
-    public HashMap<UUID, String> messages;
     public UUID owner;
 
     public Chatroom(String name, boolean anonymous){
@@ -23,7 +22,6 @@ public class Chatroom {
         this.visible = true;
         this.isPublic = true;
         members = new ArrayList<>();
-        messages = new HashMap<>();
         this.owner = null;
     }
 
@@ -44,7 +42,6 @@ public class Chatroom {
     }
 
     public void destroy() {
-        messages = null;
         owner = null;
         members = null;
     }
