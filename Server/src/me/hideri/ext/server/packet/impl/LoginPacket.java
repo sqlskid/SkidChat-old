@@ -32,6 +32,13 @@ public class LoginPacket extends Packet {
                 }
                 return;
             }
+        }else {
+            try {
+                client.getSocket().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
         }
 
         client.setUuid(UUID.fromString(uuid.getString()));

@@ -30,7 +30,7 @@ public class SkidChat extends Thread {
     private int port;
     public RSA rsa;
     public AES aes;
-    public int version = 3;
+    public int version = 2;
 
     public PublicKey theirKey;
 
